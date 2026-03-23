@@ -12,8 +12,8 @@ export const MovieDetails = ({ movie, onClose }: MovieDetailsProps) => {
   const posterUrl = movie.Poster !== "N/A" && !imageError ? movie.Poster : null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+    <div onClick={onClose} className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div onClick={(e) => e.stopPropagation()} className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-start mb-6">
             <h2 className="text-3xl font-bold text-gray-900">{movie.Title}</h2>
