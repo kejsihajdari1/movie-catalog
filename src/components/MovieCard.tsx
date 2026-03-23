@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Movie } from '../types';
 import { FilmIcon } from './icons/FilmIcon';
 
@@ -7,7 +8,8 @@ interface MovieCardProps {
 }
 
 export const MovieCard = ({ movie, onClick }: MovieCardProps) => {
-  const posterUrl = movie.Poster !== 'N/A' 
+  const [imageError, setImageError] = useState(false);
+  const posterUrl = movie.Poster !== 'N/A' && !imageError
     ? movie.Poster 
     : null;
 
@@ -22,6 +24,7 @@ export const MovieCard = ({ movie, onClick }: MovieCardProps) => {
             <img
               src={posterUrl}
               alt={movie.Title}
+              onError={() => setImageError(true)}
               className="w-full h-full object-cover"
               loading="lazy"
             />

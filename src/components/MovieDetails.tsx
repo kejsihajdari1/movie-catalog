@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { MovieDetails as MovieDetailsType } from "../types";
 import { FilmIcon } from "./icons/FilmIcon";
 
@@ -7,7 +8,8 @@ interface MovieDetailsProps {
 }
 
 export const MovieDetails = ({ movie, onClose }: MovieDetailsProps) => {
-  const posterUrl = movie.Poster !== "N/A" ? movie.Poster : null;
+  const [imageError, setImageError] = useState(false);
+  const posterUrl = movie.Poster !== "N/A" && !imageError ? movie.Poster : null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
@@ -29,6 +31,7 @@ export const MovieDetails = ({ movie, onClose }: MovieDetailsProps) => {
                 <img
                   src={posterUrl}
                   alt={movie.Title}
+                  onError={() => setImageError(true)}
                   className="w-full rounded-lg shadow-lg"
                 />
               ) : (
